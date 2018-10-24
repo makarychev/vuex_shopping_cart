@@ -1,30 +1,36 @@
 <template>
     <div>
         <h1>Product List</h1>
-        <ul>
+        <img 
+            v-if="loading"
+            src="https://i.imgur.com/JfPpwOA.gif" 
+        >
+        <ul v-else>
             <li v-for="product in products" :key="product.price">{{product.title}} - {{product.price}}</li>
         </ul>
     </div>
 </template>
 
 <script>
+    export default {
+        data () {
+            return {
+                loading: false
+            }
+        },
 
-import shop from '@/api/shop'
-import store from '@/store/index'
+        computed: {
+            products () {
+                return this.$store.getters.availableProducts
+            }
+        },
 
-export default {
-    computed: {
-        products () {
-            return store.getters.availableProducts
+        created () {
+            this.loading = true
+            this.$store.dispatch('fetchProducts')
+                .then(() => this.loading = false)
         }
-    },
-
-    created () {
-        shop.getProducts(products => {
-            store.commit('setProducts', products)
-        })
     }
-}
 </script>
 
 <style scoped>
