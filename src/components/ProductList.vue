@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import {mapState, mapGetters} from 'vuex'
     export default {
         data () {
             return {
@@ -26,13 +27,13 @@
         },
 
         computed: {
-            products () {
-                return this.$store.state.products
-            },
+            ...mapState({
+                products: state => state.products,
+            }),
 
-            productInStock () {
-                return this.$store.getters.productInStock
-            }
+            ...mapGetters({
+                productInStock: "productInStock"
+            })
         },
 
         methods: {
