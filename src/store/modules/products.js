@@ -1,6 +1,8 @@
 import shop from "@/api/shop";
 
 export default {
+    namespaced: true,
+
     state: {
         items: []
     },
@@ -30,6 +32,7 @@ export default {
 
     actions: {
         fetchProducts ({commit}){
+            console.log('hi from products (fetch)')
             return new Promise((resolve, reject) => {
                 // make the call
                 // run setProducts mutation
