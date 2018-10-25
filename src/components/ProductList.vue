@@ -28,18 +28,18 @@
 
         computed: {
             ...mapState({
-                products: state => state.products,
+                products: state => state.products.items,
             }),
 
             ...mapGetters({
-                productInStock: "productInStock"
+                productInStock: 'productInStock'
             })
         },
 
         methods: {
             ...mapActions({
                 fetchProducts: 'fetchProducts',
-                addProductToCart: "addProductToCart"
+                addProductToCart: 'addProductToCart'
             })
         },
 
